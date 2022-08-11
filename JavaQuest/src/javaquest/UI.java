@@ -12,9 +12,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
-
+import javax.swing.JPopupMenu;
+import javax.swing.JMenuItem;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.SwingUtilities;
 
 
 
@@ -31,7 +35,7 @@ public class UI {
         this.jq = jq;
         
         createMainField();
-        createBackground();
+        generateScreen();
         
         window.setVisible(true);
     }
@@ -43,7 +47,7 @@ public class UI {
         window.getContentPane().setBackground(Color.BLACK);
         window.setLayout(null);
         
-        messageText = new JTextArea("HELLO PABLO");
+        messageText = new JTextArea("HELLO PABLO. THIS IS MY HOME.");
         messageText.setBounds(50,410,700,150);
         messageText.setBackground(Color.BLACK);
         messageText.setForeground(Color.WHITE);
@@ -54,21 +58,79 @@ public class UI {
         window.add(messageText);
     }
     
-    public void createBackground(){   
-        bgPanel[1] = new JPanel();
-        bgPanel[1].setBounds(50,50,700,350);
-        bgPanel[1].setBackground(Color.BLUE);
-        bgPanel[1].setLayout(null);
+    public void createBackground(int bgNum, String bgFileName){   
+        bgPanel[bgNum] = new JPanel();
+        bgPanel[bgNum].setBounds(50,50,511,338);
+        bgPanel[bgNum].setBackground(Color.BLACK);
+        bgPanel[bgNum].setLayout(null);
         window.add(bgPanel[1]);
         
-        bgLabel[1] = new JLabel();
-        bgLabel[1].setBounds(0,0,700,350);
+        bgLabel[bgNum] = new JLabel();
+        bgLabel[bgNum].setBounds(0,0,700,350);
         
-        ImageIcon bgIcon = new ImageIcon(getClass().getClassLoader().getResource("pine.jpg"));
-        bgLabel[1].setIcon(bgIcon);
-        
-        bgPanel[1].add(bgLabel[1]);
+        ImageIcon bgIcon = new ImageIcon(getClass().getClassLoader().getResource(bgFileName));
+        bgLabel[bgNum].setIcon(bgIcon);
+            
         
     }
+    public void createObject(int bgNum, int objx, int objy, int objWidth, int objHeight, String objFileName, String choice1Name, String choice2Name,
+            String choice3Name) {
+        
+        JPopupMenu popMenu = new JPopupMenu();
+        
+        JMenuItem menuItem[] = new JMenuItem[4];
+        menuItem[1] = new JMenuItem("Go in");
+        popMenu.add(menuItem[1]);
+        
+        menuItem[2] = new JMenuItem("Inspect");
+        popMenu.add(menuItem[2]);
+               
+        
+        JLabel objectLabel = new JLabel();
+               objectLabel.setBounds(objx,objy,objWidth,objHeight);
+        
+        ImageIcon objectIcon = new ImageIcon(getClass().getClassLoader().getResource(objFileName));
+        objectLabel.setIcon(objectIcon);
+        
+        objectLabel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // write my code here
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                
+                if(SwingUtilities.isRightMouseButton(e)) {
+                    popMenu.show(objectLabel, e.getX(), e.getY());
+                    //do stuff when right mouse is clicked here (custom code from amrit vs. default MouseListener)
+                }
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+          
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+            
+        });
+        
+        bgPanel[bgNum].add(objectLabel);
+        bgPanel[bgNum].add(bgLabel[bgNum]);
+    }
     
+    public void generateScreen() {
+        
+        // SCREEN1
+        createBackground(1,"pines.png");
+        createObject(1,250,50,300,300,"cabin.png", "Go inside", "", "");
+    }
 }
