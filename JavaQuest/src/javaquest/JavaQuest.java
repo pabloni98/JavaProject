@@ -4,17 +4,15 @@
  */
 package javaquest;
 
-/**
- *
- * @author jonathan_lu
- */
 public class JavaQuest {
-
-    /**
-     * @param args the command line arguments
-     */
+    
+    UI ui = new UI(this);
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+        new JavaQuest();
     }
     
+    public JavaQuest(){
+        
+    }
 }
