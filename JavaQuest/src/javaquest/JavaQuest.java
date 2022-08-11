@@ -10,6 +10,7 @@ public class JavaQuest {
     
     public static void main(String[] args) {
         new JavaQuest();
+        System.out.println("Hello");
     }
     
     public JavaQuest(){
