@@ -6,6 +6,7 @@ package javaquest;
 
 import java.util.HashSet;
 import javaquest.Event.Event01;
+import javaquest.Event.Event02;
 
 public class JavaQuest {
     
@@ -15,6 +16,7 @@ public class JavaQuest {
     public SceneChanger sChanger = new SceneChanger(this);
     
     public Event01 ev1 = new Event01(this);
+    public Event02 ev2 = new Event02(this);
     
     public static void main(String[] args) {
         new JavaQuest();

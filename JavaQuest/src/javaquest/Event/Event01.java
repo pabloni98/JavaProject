@@ -23,8 +23,63 @@ public class Event01 {
     {
         jq.ui.messageText.setText("This is my house. Would you like to come inside?");
     }
-    public void enterHut()
+    public void restHut()
     {
-        jq.ui.messageText.setText("You enter the house."); 
+        if(jq.player.playerLife != jq.player.playerMaxLife)
+        {
+            jq.ui.messageText.setText("You rest until morning.\n(Your life has recovered)");
+            jq.player.playerLife++;
+            jq.player.updatePlayerStatus();
+        }
+        else
+        {
+            jq.ui.messageText.setText("You rest until morning.\n(Your life is already fool)");
+        }
     }
+   
+    
+    public void talkPerson()
+    {
+        jq.ui.messageText.setText("Feel free to rest inside.");
+    }
+    public void inspectPerson()
+    {
+        jq.ui.messageText.setText("The person looks mysterious.\nYou are not sure whether you can trust him.");
+    }
+    public void attackPerson()
+    {
+        
+        if (jq.player.hasShield == 0)
+        {
+            if(jq.player.hasSword == 0)
+            {
+                if (jq.player.playerLife != 1)
+                {
+                    jq.ui.messageText.setText("Person: Why would you do that?\n(The person pushes you back and your life decreases by 1)");
+                    jq.player.playerLife--;
+                    //jq.player.updatePlayerStatus();
+                }
+                else if (jq.player.playerLife == 1)
+                {
+                    jq.ui.messageText.setText("Person: How foolish.");
+                    jq.player.playerLife--;
+                    //jq.player.updatePlayerStatus();
+                }
+            }
+            else if (jq.player.hasSword == 1)
+            {
+                jq.ui.messageText.setText("Person: Why?\n(You have defeated the person and took his shield).");
+                jq.player.hasShield = 1;
+                //jq.player.updatePlayerStatus();
+            }
+            jq.player.updatePlayerStatus();
+        }
+        else
+        {
+            jq.ui.messageText.setText("Person: Just leave me alone. What more do you want?");
+        }
+        
+    }
+    
+    
 }

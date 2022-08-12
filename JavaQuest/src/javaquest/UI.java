@@ -57,7 +57,7 @@ public class UI {
         window.getContentPane().setBackground(Color.BLACK);
         window.setLayout(null);
         
-        messageText = new JTextArea("HELLO PABLO. THIS IS MY HOME.");
+        messageText = new JTextArea("HELLO STRANGER. THIS IS MY HOME.");
         messageText.setBounds(50,410,700,150);
         messageText.setBackground(Color.BLACK);
         messageText.setForeground(Color.WHITE);
@@ -70,7 +70,7 @@ public class UI {
     
     public void createBackground(int bgNum, String bgFileName){   
         bgPanel[bgNum] = new JPanel();
-        bgPanel[bgNum].setBounds(50,50,511,338);
+        bgPanel[bgNum].setBounds(50,50,511,450);
         bgPanel[bgNum].setBackground(Color.BLACK);
         bgPanel[bgNum].setLayout(null);
         window.add(bgPanel[bgNum]);
@@ -101,7 +101,7 @@ public class UI {
         
         menuItem[3] = new JMenuItem(choice3Name);
         menuItem[3].addActionListener(jq.aHandler);
-        menuItem[3].setActionCommand(choice2Command);  
+        menuItem[3].setActionCommand(choice3Command);  
         popMenu.add(menuItem[3]);
         
         JLabel objectLabel = new JLabel();
@@ -220,21 +220,23 @@ public class UI {
     public void generateScene() {
         
         // SCENE 1
-        createBackground(1,"pines.png");
-        createObject(1,250,100,170,200,"cabin.png", "Go inside", "Inspect", "", "enterHut", "inspectHut", "");
-        createArrowButton(1, 450, 150, 50, 50, "arrowright.png", "goScene2");
+        createBackground(1,"woods.jpg");
+        createObject(1,100,120,100,200,"person.png", "Talk", "Attack", "Inspect", "talkPerson", "attackPerson", "inspectPerson");
+        createObject(1,250,100,170,200,"cabin.png", "Rest", "Inspect", "Go Inside", "restHut", "inspectHut", "enterHut");
+        createArrowButton(1, 420, 150, 70, 50, "rightarrow.png", "goScene2");
         bgPanel[1].add(bgLabel[1]);
         
         // SCENE 2
         createBackground(2,"forest.jpg");
+        createObject(2,300,290,70,50,"chest.png", "Open", "Inspect", "", "openChest", "inspectChest", "");
         //createObject(1,250,50,300,300,"cabin.png", "Go inside", "Inspect", "", "enterHut", "inspectHut", "");
-        createArrowButton(2, 10, 150, 50, 50, "arrowleft.png", "goScene1");
+        createArrowButton(2, 20, 150, 70, 50, "leftarrow.png", "goScene1");
         bgPanel[2].add(bgLabel[2]);
         
         // SCENE HUT INTERIOR
         createBackground(3,"hutinterior.jpg");
         //createObject(1,250,50,300,300,"cabin.png", "Go inside", "Inspect", "", "enterHut", "inspectHut", "");
-        //createArrowButton(2, 10, 150, 50, 50, "arrowleft.png", "goScene1");
+        createArrowButton(3, 30, 150, 70, 50, "leftarrow.png", "goScene1");
         bgPanel[3].add(bgLabel[3]);
     }
 }

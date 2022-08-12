@@ -25,10 +25,22 @@ public class ActionHandler implements ActionListener{
         
         switch(yourChoice)
         {
-            //case "enterHut": jq.ev1.enterHut(); break;
-            case "enterHut": jq.sChanger.showHutInterior(); break;
+            // SCENE 1
+            case "restHut": jq.ev1.restHut(); break;
+            //case "enterHut": jq.sChanger.showHutInterior(); break;
             case "inspectHut":  jq.ev1.inspectHut(); break;
+            case "enterHut": jq.sChanger.showHutInterior(); break;
             
+            case "talkPerson": jq.ev1.talkPerson(); break;
+            case "inspectPerson": jq.ev1.inspectPerson(); break;
+            case "attackPerson": jq.ev1.attackPerson(); break;
+            
+            // SCENE 2
+            case "openChest": jq.ev2.openChest(); break;
+            case "inspectChest": jq.ev2.inspectChest(); break;
+            
+            
+
             //Change Scenes
             case "goScene1": jq.sChanger.showScene1(); break;
             case "goScene2": jq.sChanger.showScene2(); break;

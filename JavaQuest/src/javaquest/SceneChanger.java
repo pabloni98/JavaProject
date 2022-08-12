@@ -27,13 +27,13 @@ public class SceneChanger {
     {
         jq.ui.bgPanel[1].setVisible(false);
         jq.ui.bgLabel[2].setVisible(true);
-        jq.ui.bgLabel[3].setVisible(false);
+        jq.ui.bgPanel[3].setVisible(false);
         jq.ui.messageText.setText("As you enter deeper into the woods, the\ntrees become thicker and the forest darker.");
     }
     public void showHutInterior()
     {
         jq.ui.bgPanel[1].setVisible(false);
-        jq.ui.bgLabel[2].setVisible(false);
+        jq.ui.bgPanel[2].setVisible(false);
         jq.ui.bgLabel[3].setVisible(true);
         jq.ui.messageText.setText("The inside of the house is dark.\nYou feel uneasy.");
     }
