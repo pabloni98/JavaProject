@@ -16,8 +16,11 @@ import javax.swing.JPopupMenu;
 import javax.swing.JMenuItem;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 
 
@@ -31,11 +34,18 @@ public class UI {
     public JPanel bgPanel[] = new JPanel[10];
     public JLabel bgLabel[] = new JLabel[10];
     
+    // PLAYER UI
+    JPanel lifePanel;
+    JLabel lifeLabel[] = new JLabel[6];
+    JPanel inventoryPanel;
+    public JLabel swordLabel, shieldLabel, lanternLabel;
+    
     public UI(JavaQuest jq){
         this.jq = jq;
         
         createMainField();
-        generateScreen();
+        createPlayerField();
+        generateScene();
         
         window.setVisible(true);
     }
@@ -63,7 +73,7 @@ public class UI {
         bgPanel[bgNum].setBounds(50,50,511,338);
         bgPanel[bgNum].setBackground(Color.BLACK);
         bgPanel[bgNum].setLayout(null);
-        window.add(bgPanel[1]);
+        window.add(bgPanel[bgNum]);
         
         bgLabel[bgNum] = new JLabel();
         bgLabel[bgNum].setBounds(0,0,700,350);
@@ -74,20 +84,32 @@ public class UI {
         
     }
     public void createObject(int bgNum, int objx, int objy, int objWidth, int objHeight, String objFileName, String choice1Name, String choice2Name,
-            String choice3Name) {
+            String choice3Name, String choice1Command, String choice2Command, String choice3Command) {
         
         JPopupMenu popMenu = new JPopupMenu();
         
         JMenuItem menuItem[] = new JMenuItem[4];
-        menuItem[1] = new JMenuItem("Go in");
+        menuItem[1] = new JMenuItem(choice1Name);
+        menuItem[1].addActionListener(jq.aHandler);
+        menuItem[1].setActionCommand(choice1Command);
         popMenu.add(menuItem[1]);
         
-        menuItem[2] = new JMenuItem("Inspect");
+        menuItem[2] = new JMenuItem(choice2Name);
+        menuItem[2].addActionListener(jq.aHandler);
+        menuItem[2].setActionCommand(choice2Command);
         popMenu.add(menuItem[2]);
-               
+        
+        menuItem[3] = new JMenuItem(choice3Name);
+        menuItem[3].addActionListener(jq.aHandler);
+        menuItem[3].setActionCommand(choice2Command);  
+        popMenu.add(menuItem[3]);
         
         JLabel objectLabel = new JLabel();
-               objectLabel.setBounds(objx,objy,objWidth,objHeight);
+        objectLabel.setBounds(objx,objy,objWidth,objHeight);
+        
+        // Just for development to see clickable areas
+        //objectLabel.setOpaque(true);
+        //objectLabel.setBackground(Color.blue);
         
         ImageIcon objectIcon = new ImageIcon(getClass().getClassLoader().getResource(objFileName));
         objectLabel.setIcon(objectIcon);
@@ -124,13 +146,95 @@ public class UI {
         });
         
         bgPanel[bgNum].add(objectLabel);
-        bgPanel[bgNum].add(bgLabel[bgNum]);
+        
+    }
+    public void createArrowButton(int bgNum, int x, int y, int width, int height, String arrowFileName, String command)
+    {
+        ImageIcon arrowIcon = new ImageIcon(getClass().getClassLoader().getResource(arrowFileName));
+        JButton arrowButton = new JButton();
+        arrowButton.setBounds(x, y, width, height);
+        arrowButton.setBackground(null);
+        arrowButton.setContentAreaFilled(false);
+        arrowButton.setFocusPainted(false);
+        arrowButton.setIcon(arrowIcon);
+        arrowButton.addActionListener(jq.aHandler);
+        arrowButton.setActionCommand(command);
+        arrowButton.setBorderPainted(false);
+        
+        bgPanel[bgNum].add(arrowButton);
+        
     }
     
-    public void generateScreen() {
+    public void createPlayerField()
+    {
+        lifePanel = new JPanel();
+        lifePanel.setBounds(50, 0, 250, 50);
+        lifePanel.setBackground(Color.black);
+        lifePanel.setLayout(new GridLayout(1,5));
+        window.add(lifePanel);
         
-        // SCREEN1
+        ImageIcon lifeIcon = new ImageIcon(getClass().getClassLoader().getResource("heart.png"));
+        Image image = lifeIcon.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT);
+        lifeIcon = new ImageIcon(image);
+        
+        int i=1;
+        while(i<6)
+        {
+            lifeLabel[i] = new JLabel();
+            lifeLabel[i].setIcon(lifeIcon);
+            lifePanel.add(lifeLabel[i]);
+            i++;
+        }
+        
+        inventoryPanel = new JPanel();
+        inventoryPanel.setBounds(650, 0, 100, 50);
+        inventoryPanel.setBackground(Color.black);
+        inventoryPanel.setLayout(new GridLayout(1, 3));
+        window.add(inventoryPanel);
+        
+        // ITEMS
+        swordLabel = new JLabel();
+        ImageIcon swordIcon = new ImageIcon(getClass().getClassLoader().getResource("sword.png"));
+        image = swordIcon.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT);
+        swordIcon = new ImageIcon(image);
+        swordLabel.setIcon(swordIcon);
+        inventoryPanel.add(swordLabel);
+        
+        shieldLabel = new JLabel();
+        ImageIcon shieldIcon = new ImageIcon(getClass().getClassLoader().getResource("shield.png"));
+        image = shieldIcon.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT);
+        shieldIcon = new ImageIcon(image);
+        shieldLabel = new JLabel();
+        shieldLabel.setIcon(shieldIcon);
+        inventoryPanel.add(shieldLabel);
+        
+        lanternLabel = new JLabel();
+        ImageIcon lanternIcon = new ImageIcon(getClass().getClassLoader().getResource("lantern.png"));
+        image = lanternIcon.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT);
+        lanternIcon = new ImageIcon(image);
+        lanternLabel.setIcon(lanternIcon);
+        inventoryPanel.add(lanternLabel);
+        
+    }
+    
+    public void generateScene() {
+        
+        // SCENE 1
         createBackground(1,"pines.png");
-        createObject(1,250,50,300,300,"cabin.png", "Go inside", "", "");
+        createObject(1,250,100,170,200,"cabin.png", "Go inside", "Inspect", "", "enterHut", "inspectHut", "");
+        createArrowButton(1, 450, 150, 50, 50, "arrowright.png", "goScene2");
+        bgPanel[1].add(bgLabel[1]);
+        
+        // SCENE 2
+        createBackground(2,"forest.jpg");
+        //createObject(1,250,50,300,300,"cabin.png", "Go inside", "Inspect", "", "enterHut", "inspectHut", "");
+        createArrowButton(2, 10, 150, 50, 50, "arrowleft.png", "goScene1");
+        bgPanel[2].add(bgLabel[2]);
+        
+        // SCENE HUT INTERIOR
+        createBackground(3,"hutinterior.jpg");
+        //createObject(1,250,50,300,300,"cabin.png", "Go inside", "Inspect", "", "enterHut", "inspectHut", "");
+        //createArrowButton(2, 10, 150, 50, 50, "arrowleft.png", "goScene1");
+        bgPanel[3].add(bgLabel[3]);
     }
 }

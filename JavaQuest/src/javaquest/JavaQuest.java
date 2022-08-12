@@ -4,9 +4,17 @@
  */
 package javaquest;
 
+import java.util.HashSet;
+import javaquest.Event.Event01;
+
 public class JavaQuest {
     
-    UI ui = new UI(this);
+    ActionHandler aHandler = new ActionHandler(this);
+    public UI ui = new UI(this);
+    public Player player = new Player(this);
+    public SceneChanger sChanger = new SceneChanger(this);
+    
+    public Event01 ev1 = new Event01(this);
     
     public static void main(String[] args) {
         new JavaQuest();
@@ -14,6 +22,10 @@ public class JavaQuest {
     }
     
     public JavaQuest(){
+        // To call showScene1 when the game starts
+        //sChanger.showScene1();
+        player.setPlayerDefaultStatus();
+        
         
     }
 }
