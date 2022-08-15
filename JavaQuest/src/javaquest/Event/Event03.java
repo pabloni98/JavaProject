@@ -108,7 +108,7 @@ public class Event03 {
                 {
                     if (jq.player.playerLife != 1)
                     {
-                        jq.ui.messageText.setText("Monster: Take that!\n(You deal 1 damage and receive 2 damage)");
+                        jq.ui.messageText.setText("Monster: Take that!\n(You deal 1 damage and receive 1 damage)");
                         jq.player.playerLife--;
                         monsterLife--;
                     }
@@ -124,7 +124,7 @@ public class Event03 {
                 {
                     if (jq.player.playerLife != 1)
                     {
-                        jq.ui.messageText.setText("Monster: That actually hurt.\n(You deal 2 damage and receieve 2 damage)");
+                        jq.ui.messageText.setText("Monster: That actually hurt.\n(You deal 2 damage and receieve 1 damage)");
                         jq.player.playerLife--;
                         monsterLife--;
                         monsterLife--;
@@ -144,7 +144,7 @@ public class Event03 {
         else
         {
            jq.ui.messageText.setText("You have deafeated the monster!"); 
-           //monsterLife--;
+           monsterLife--;
         }
     }
 }

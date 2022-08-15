@@ -80,7 +80,7 @@ public class UI {
         bgPanel[bgNum].setBounds(50,50,511,450);
         bgPanel[bgNum].setBackground(Color.BLACK);
         bgPanel[bgNum].setLayout(null);
-        //bgPanel[bgNum].setVisible(false);
+        bgPanel[bgNum].setVisible(false);
         window.add(bgPanel[bgNum]);
         
         bgLabel[bgNum] = new JLabel();
@@ -283,5 +283,6 @@ public class UI {
         //createObject(1,250,50,300,300,"cabin.png", "Go inside", "Inspect", "", "enterHut", "inspectHut", "");
         createArrowButton(3, 20, 150, 70, 50, "leftarrow.png", "goScene2");
         bgPanel[3].add(bgLabel[3]);
+        
     }
 }

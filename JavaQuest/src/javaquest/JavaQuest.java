@@ -30,11 +30,12 @@ public class JavaQuest {
         //sChanger.showScene1();
         player.setPlayerDefaultStatus();
         ev3.monsterLife = 5;
+        sChanger.showScene1();
         
     }
 
-        //sChanger.showScene1();
+       
         
         
-    }
+ }
 

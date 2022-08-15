@@ -22,8 +22,9 @@ public class SceneChanger {
     {
         
         jq.ui.bgPanel[1].setVisible(true);
-	jq.ui.bgPanel[2].setVisible(false);	
-        jq.ui.messageText.setText("Oh? You're back.\nHave you reconsidered my offer?");
+	jq.ui.bgPanel[2].setVisible(false);
+        jq.ui.bgPanel[3].setVisible(false);
+        jq.ui.messageText.setText("Hello stranger.\nThis is my home.");
     }
     public void showScene2()
     {
@@ -32,13 +33,6 @@ public class SceneChanger {
 	jq.ui.bgPanel[3].setVisible(false);
         jq.ui.messageText.setText("As you enter deeper into the woods, the\ntrees become thicker and the forest darker.");
     }
-    /*public void showHutInterior()
-    {   
-        
-        jq.ui.bgPanel[2].setVisible(false);
-	jq.ui.bgPanel[3].setVisible(true);
-        jq.ui.messageText.setText("The inside of the house is dark.\nYou feel uneasy.");
-    }*/
     public void showScene3()
     {
         jq.ui.bgPanel[2].setVisible(false);
@@ -47,9 +41,6 @@ public class SceneChanger {
     }
     public void showGameOverScreen(int currentBgNum)
     {
-        //jq.ui.bgLabel[3].setVisible(false);
-        //jq.ui.bgPanel[1].setVisible(false);
-        //jq.ui.bgPanel[2].setVisible(false);
         jq.ui.bgPanel[currentBgNum].setVisible(false);
         jq.ui.titleLabel.setVisible(true);
         jq.ui.titleLabel.setText("YOU DIED");

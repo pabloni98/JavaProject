@@ -49,7 +49,7 @@ public class Event02 {
     {
         if (jq.player.hasLantern == 0)
         {
-           jq.ui.messageText.setText("The cave is too dark to enter.\nTry finding something to illuminate the way.");
+           jq.ui.messageText.setText("The cave is too dark to enter.\n(Try finding something to illuminate the way.)");
         }
         else
         {
