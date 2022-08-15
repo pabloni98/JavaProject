@@ -34,6 +34,27 @@ public class Event02 {
     }
     public void inspectChest()
     {
-        jq.ui.messageText.setText("There's suspicious chest.");
+        jq.ui.messageText.setText("There's a suspicious chest.");
+    }
+    
+    public void inspectCave()
+    {
+        jq.ui.messageText.setText("The cave is so dark you can't see anything.");
+    }
+    public void talkCave()
+    {
+        jq.ui.messageText.setText("You shout and hear your echo resounding.");
+    }
+    public void enterCave()
+    {
+        if (jq.player.hasLantern == 0)
+        {
+           jq.ui.messageText.setText("The cave is too dark to enter.\nTry finding something to illuminate the way.");
+        }
+        else
+        {
+            jq.sChanger.showScene3(); 
+        }
+        
     }
 }

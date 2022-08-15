@@ -20,6 +20,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.HashSet;
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 
@@ -40,18 +41,24 @@ public class UI {
     JPanel inventoryPanel;
     public JLabel swordLabel, shieldLabel, lanternLabel;
     
+    // Game Over UI
+    public JLabel titleLabel;
+    public JButton restartButton;
+    
     public UI(JavaQuest jq){
         this.jq = jq;
         
         createMainField();
         createPlayerField();
+        createGameOverField();
         generateScene();
         
         window.setVisible(true);
     }
     
+    
     public void createMainField(){
-        window = new JFrame();
+        window = new JFrame("Java Quest");
         window.setSize(800, 600);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setBackground(Color.BLACK);
@@ -73,6 +80,7 @@ public class UI {
         bgPanel[bgNum].setBounds(50,50,511,450);
         bgPanel[bgNum].setBackground(Color.BLACK);
         bgPanel[bgNum].setLayout(null);
+        //bgPanel[bgNum].setVisible(false);
         window.add(bgPanel[bgNum]);
         
         bgLabel[bgNum] = new JLabel();
@@ -86,8 +94,9 @@ public class UI {
     public void createObject(int bgNum, int objx, int objy, int objWidth, int objHeight, String objFileName, String choice1Name, String choice2Name,
             String choice3Name, String choice1Command, String choice2Command, String choice3Command) {
         
+        //Pop up menu
         JPopupMenu popMenu = new JPopupMenu();
-        
+        // Pop up menu items
         JMenuItem menuItem[] = new JMenuItem[4];
         menuItem[1] = new JMenuItem(choice1Name);
         menuItem[1].addActionListener(jq.aHandler);
@@ -115,11 +124,13 @@ public class UI {
         objectLabel.setIcon(objectIcon);
         
         objectLabel.addMouseListener(new MouseListener() {
+           
             @Override
             public void mouseClicked(MouseEvent e) {
                 // write my code here
             }
 
+            
             @Override
             public void mousePressed(MouseEvent e) {
                 
@@ -129,16 +140,19 @@ public class UI {
                 }
             }
 
+            
             @Override
             public void mouseReleased(MouseEvent e) {
           
             }
 
+           
             @Override
             public void mouseEntered(MouseEvent e) {
                 
             }
 
+           
             @Override
             public void mouseExited(MouseEvent e) {
             }
@@ -217,6 +231,28 @@ public class UI {
         
     }
     
+    public void createGameOverField()
+    {
+        titleLabel = new JLabel("", JLabel.CENTER);
+        titleLabel.setBounds(200, 150, 400, 200);
+        titleLabel.setForeground(Color.red);
+        titleLabel.setFont(new Font("Times New Roman", Font.PLAIN, 70));
+        titleLabel.setVisible(false);
+        window.add(titleLabel);
+        
+        restartButton = new JButton();
+        restartButton.setBounds(340, 320, 120, 50);
+        restartButton.setBorder(null);
+        restartButton.setBackground(null);
+        restartButton.setForeground(Color.white);
+        restartButton.setFocusPainted(false);
+        restartButton.addActionListener(jq.aHandler);
+        restartButton.setActionCommand("restart");
+        restartButton.setVisible(false);
+        window.add(restartButton);
+        
+    }
+    
     public void generateScene() {
         
         // SCENE 1
@@ -228,15 +264,24 @@ public class UI {
         
         // SCENE 2
         createBackground(2,"forest.jpg");
-        createObject(2,300,290,70,50,"chest.png", "Open", "Inspect", "", "openChest", "inspectChest", "");
-        //createObject(1,250,50,300,300,"cabin.png", "Go inside", "Inspect", "", "enterHut", "inspectHut", "");
+        //createObject(2,300,290,70,50,"chest.png", "Open", "Inspect", "", "openChest", "inspectChest", "");
+        createObject(2,90,290,70,50,"chest.png", "Open", "Inspect", "", "openChest", "inspectChest", "");
+        createObject(2,300,220,200,123,"caveentrance2.png", "Inspect", "Talk", "Enter", "inspectCave", "talkCave", "enterCave");
         createArrowButton(2, 20, 150, 70, 50, "leftarrow.png", "goScene1");
+        //createArrowButton(2, 420, 150, 70, 50, "rightarrow.png", "goScene3");
         bgPanel[2].add(bgLabel[2]);
         
         // SCENE HUT INTERIOR
-        createBackground(3,"hutinterior.jpg");
+        /*createBackground(3,"hutinterior.jpg");
         //createObject(1,250,50,300,300,"cabin.png", "Go inside", "Inspect", "", "enterHut", "inspectHut", "");
         createArrowButton(3, 30, 150, 70, 50, "leftarrow.png", "goScene1");
+        bgPanel[3].add(bgLabel[3]);*/
+        
+        // SCENE 3
+        createBackground(3,"cave.jpg");
+        createObject(3,200,100,300,300,"monster.png", "Inspect", "Talk", "Attack", "inspectMonster", "talkMonster", "attackMonster");
+        //createObject(1,250,50,300,300,"cabin.png", "Go inside", "Inspect", "", "enterHut", "inspectHut", "");
+        createArrowButton(3, 20, 150, 70, 50, "leftarrow.png", "goScene2");
         bgPanel[3].add(bgLabel[3]);
     }
 }

@@ -7,6 +7,7 @@ package javaquest;
 import java.util.HashSet;
 import javaquest.Event.Event01;
 import javaquest.Event.Event02;
+import javaquest.Event.Event03;
 
 public class JavaQuest {
     
@@ -17,17 +18,23 @@ public class JavaQuest {
     
     public Event01 ev1 = new Event01(this);
     public Event02 ev2 = new Event02(this);
+    public Event03 ev3 = new Event03(this);
     
     public static void main(String[] args) {
         new JavaQuest();
-        System.out.println("Hello");
+        //System.out.println("Hello");
     }
     
     public JavaQuest(){
         // To call showScene1 when the game starts
         //sChanger.showScene1();
         player.setPlayerDefaultStatus();
+        ev3.monsterLife = 5;
+        
+    }
+
+        //sChanger.showScene1();
         
         
     }
-}
+

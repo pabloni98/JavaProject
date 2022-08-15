@@ -21,7 +21,7 @@ public class Event01 {
     
     public void inspectHut()
     {
-        jq.ui.messageText.setText("This is my house. Would you like to come inside?");
+        jq.ui.messageText.setText("Person: This is my house.\nWould you like to come inside?");
     }
     public void restHut()
     {
@@ -33,14 +33,27 @@ public class Event01 {
         }
         else
         {
-            jq.ui.messageText.setText("You rest until morning.\n(Your life is already fool)");
+            jq.ui.messageText.setText("You rest until morning.\n(Your life is already full)");
+        }
+    }
+    public void enterHut()
+    {
+        if (jq.player.hasLantern == 0)
+        {
+            jq.ui.messageText.setText("You enter the house and find a lantern.\n(Lantern unlocked)");
+            jq.player.hasLantern = 1;
+            jq.player.updatePlayerStatus();
+        }
+        else
+        {
+            jq.ui.messageText.setText("There's nothing interesting here.");
         }
     }
    
     
     public void talkPerson()
     {
-        jq.ui.messageText.setText("Feel free to rest inside.");
+        jq.ui.messageText.setText("Person: Feel free to rest inside.");
     }
     public void inspectPerson()
     {
@@ -64,6 +77,7 @@ public class Event01 {
                     jq.ui.messageText.setText("Person: How foolish.");
                     jq.player.playerLife--;
                     //jq.player.updatePlayerStatus();
+                    jq.sChanger.showGameOverScreen(1);
                 }
             }
             else if (jq.player.hasSword == 1)
